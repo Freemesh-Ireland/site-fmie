@@ -1,0 +1,17 @@
+# This file allows specifying additional repositories to use
+# when building gluon.
+
+# for each feed name given, add the corresponding PACKAGES_* lines
+GLUON_SITE_FEEDS='ffki eulenfunk'
+
+# the git repository from where to clone the package feed
+PACKAGES_FFKI_REPO=git://github.com/freifunk-kiel/ffki-packages/
+PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
+
+#	the version/commit of the git repository to clone
+PACKAGES_EULENFUNK_COMMIT=b4f89eff180c6a78f86d0f8c9c8a116c620136ac
+PACKAGES_FFKI_COMMIT=ef1192086aa24925d8f65a80f71b720332b1fbe5
+
+#   the branch to check out
+PACKAGES_FFKI_BRANCH=master
+PACKAGES_EULENFUNK_BRANCH=v2016.2-ibss
