@@ -17,7 +17,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-next-node \
 	gluon-mesh-vpn-fastd \
 	gluon-radvd \
-	gluon-status-page \
 	iwinfo \
 	iptables \
 	haveged
@@ -27,7 +26,8 @@ GLUON_SITE_PACKAGES += \
 # from ffki-packages:
 GLUON_SITE_PACKAGES += \
 	gluon-config-mode-hostname-no-pretty \
-	gluon-config-mode-contact-info-anonymous-hint
+	gluon-config-mode-contact-info-anonymous-hint \
+	gluon-status-page-en
 
 # Always call `make` from the command line with the desired release version!
 # otherwise this is generated:
