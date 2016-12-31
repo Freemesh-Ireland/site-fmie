@@ -50,23 +50,23 @@ do
 	if [ -z "$VERSION" ]
 	then
 		echo "Starting work on target $TARGET" | tee -a build.log
-		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
 		make clean
-		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
-		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
-		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
-		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
+		make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
+		make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
+		make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 		make clean
 	else
 		echo "Starting work on target $TARGET" | tee -a build.log
-		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
-		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
-		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
-		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
-		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
+		make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
+		make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
+		make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 		make clean
 	fi
@@ -75,21 +75,21 @@ date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
-echo -e "make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=experimental manifest" >> build.log
-make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=experimental manifest >> build.log 2>&1
+echo -e "make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_BRANCH=experimental manifest" >> build.log
+make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_BRANCH=experimental manifest >> build.log 2>&1
 echo -e "\n\n\n============================================================\n\n" >> build.log
 
 if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]
 then
-	echo -e "make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=beta manifest" >> build.log
-	make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=beta manifest >> build.log 2>&1
+	echo -e "make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_BRANCH=beta manifest" >> build.log
+	make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_BRANCH=beta manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
 if [[ "$BRANCH" == "stable" ]]
 then
-	echo -e "make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=stable manifest" >> build.log
-	make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=stable manifest >> build.log 2>&1
+	echo -e "make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_BRANCH=stable manifest" >> build.log
+	make -j$NUM_CORES_PLUS_ONE -Orecurse GLUON_BRANCH=stable manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
