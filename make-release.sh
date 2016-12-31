@@ -17,6 +17,8 @@ BRANCH=${2:-"stable"}
 SIGNING_KEY=${1:-"../ecdsa-key-secret"}
 #BROKEN must be set to "" or "BROKEN=1"
 BROKEN="BROKEN=1"
+# Cores of your computer +1
+NUM_CORES_PLUS_ONE="2"
 
 cd ../
 if [ ! -d "site" ]; then
@@ -48,23 +50,23 @@ do
 	if [ -z "$VERSION" ]
 	then
 		echo "Starting work on target $TARGET" | tee -a build.log
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable update" >> build.log
 		make clean
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
+		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable update >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean" >> build.log
+		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable clean >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN" >> build.log
+		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable V=s $BROKEN >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 		make clean
 	else
 		echo "Starting work on target $TARGET" | tee -a build.log
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
-		echo -e "\n\n\nmake GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
-		make GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update" >> build.log
+		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION update >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean" >> build.log
+		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION clean >> build.log 2>&1
+		echo -e "\n\n\nmake -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN" >> build.log
+		make -j$NUM_CORES_PLUS_ONE GLUON_TARGET=$TARGET GLUON_BRANCH=stable GLUON_RELEASE=$VERSION V=s $BROKEN >> build.log 2>&1
 		echo -e "\n\n\n============================================================\n\n" >> build.log
 		make clean
 	fi
@@ -73,21 +75,21 @@ date >> build.log
 
 echo "Compilation complete, creating manifest(s)" | tee -a build.log
 
-echo -e "make GLUON_BRANCH=experimental manifest" >> build.log
-make GLUON_BRANCH=experimental manifest >> build.log 2>&1
+echo -e "make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=experimental manifest" >> build.log
+make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=experimental manifest >> build.log 2>&1
 echo -e "\n\n\n============================================================\n\n" >> build.log
 
 if [[ "$BRANCH" == "beta" ]] || [[ "$BRANCH" == "stable" ]]
 then
-	echo -e "make GLUON_BRANCH=beta manifest" >> build.log
-	make GLUON_BRANCH=beta manifest >> build.log 2>&1
+	echo -e "make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=beta manifest" >> build.log
+	make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=beta manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
 if [[ "$BRANCH" == "stable" ]]
 then
-	echo -e "make GLUON_BRANCH=stable manifest" >> build.log
-	make GLUON_BRANCH=stable manifest >> build.log 2>&1
+	echo -e "make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=stable manifest" >> build.log
+	make -j$NUM_CORES_PLUS_ONE GLUON_BRANCH=stable manifest >> build.log 2>&1
 	echo -e "\n\n\n============================================================\n\n" >> build.log
 fi
 
