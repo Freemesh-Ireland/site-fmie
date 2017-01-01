@@ -10,7 +10,7 @@ PACKAGES_EULENFUNK_REPO=https://github.com/Freifunk-Nord/eulenfunk-packages
 
 #	the version/commit of the git repository to clone
 PACKAGES_EULENFUNK_COMMIT=b4f89eff180c6a78f86d0f8c9c8a116c620136ac
-PACKAGES_FFKI_COMMIT=308c62b5515132ee4c3325acbfc3b1ad683e7200
+PACKAGES_FFKI_COMMIT=5f42e314db69e3470e5cac7bc44ce090910cfeeb
 
 #   the branch to check out
 PACKAGES_FFKI_BRANCH=master
